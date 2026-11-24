@@ -36,7 +36,7 @@ const Navbar = () => {
   return (
     <header className="sticky top-0 z-30 border-b border-base-300/80 bg-base-100/95 backdrop-blur-md">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="navbar relative min-h-16 gap-3 px-0 py-2">
+        <div className="navbar min-h-16 gap-3 px-0 py-2">
           {/* Brand Logo */}
           <Link
             className="flex shrink-0 items-center gap-2 text-2xl font-bold tracking-widest text-base-content"
@@ -49,11 +49,7 @@ const Navbar = () => {
 
           {/* Search Bar - DaisyUI join */}
           {!isAdmin && (
-            <form
-              onSubmit={handleSearch}
-              className="join absolute left-1/2 hidden w-full max-w-xs -translate-x-1/2 sm:flex"
-              role="search"
-            >
+            <form onSubmit={handleSearch} className="join hidden sm:flex w-full max-w-xs ml-4" role="search">
               <span className="join-item flex items-center bg-base-200 px-3 text-base-content/50">
                 <Icon icon="mdi:magnify" width="18" aria-hidden="true" />
               </span>
