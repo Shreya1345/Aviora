@@ -54,7 +54,7 @@ const Navbar = () => {
 
           {/* Search Bar - DaisyUI join (tablet/desktop) */}
           {!isAdmin && (
-            <form onSubmit={handleSearch} className="join hidden md:flex w-full max-w-xs ml-4" role="search">
+            <form onSubmit={handleSearch} className="join hidden md:flex w-full md:max-w-[190px] lg:max-w-xs ml-3 lg:ml-4" role="search">
               <span className="join-item flex items-center bg-base-200 px-3 text-base-content/50">
                 <Icon icon="mdi:magnify" width="18" aria-hidden="true" />
               </span>
@@ -77,36 +77,36 @@ const Navbar = () => {
           )}
 
           {/* Desktop Nav Actions */}
-          <nav className="ml-auto hidden md:flex items-center gap-1 lg:gap-2" aria-label="Main navigation">
+          <nav className="ml-auto hidden md:flex items-center gap-0.5 lg:gap-2" aria-label="Main navigation">
             {!isAdmin && (
               <>
-                {navLink('/shop', 'mdi:storefront-outline', 'Collections')}
+                {navLink('/shop', 'mdi:storefront-outline', 'Collections', 'md:px-2 lg:px-3')}
                 <Link
                   to="/cart"
-                  className="btn btn-ghost btn-sm text-xs font-semibold uppercase tracking-wider text-base-content/80 hover:text-primary hover:bg-base-200/60"
+                  className="btn btn-ghost btn-sm md:px-2 lg:px-3 text-xs font-semibold uppercase tracking-wider text-base-content/80 hover:text-primary hover:bg-base-200/60"
                 >
                   <Icon icon="mdi:cart-outline" width="16" aria-hidden="true" />
                   <span>Cart</span>
                   <span className="badge badge-primary badge-sm text-white font-bold">{cartItems.length}</span>
                 </Link>
-                {navLink('/wishlist', 'mdi:heart-outline', 'Wishlist')}
+                {navLink('/wishlist', 'mdi:heart-outline', 'Wishlist', 'md:px-2 lg:px-3')}
               </>
             )}
 
             {user ? (
               <>
-                {navLink('/profile', 'mdi:account-circle-outline', isAdmin ? 'Aviora' : user.name)}
-                {isAdmin && navLink('/admin', 'mdi:view-dashboard-outline', 'Dashboard')}
+                {navLink('/profile', 'mdi:account-circle-outline', isAdmin ? 'Aviora' : user.name, 'md:px-2 lg:px-3')}
+                {isAdmin && navLink('/admin', 'mdi:view-dashboard-outline', 'Dashboard', 'md:px-2 lg:px-3')}
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="btn btn-ghost btn-sm text-xs font-semibold uppercase tracking-wider text-error"
+                  className="btn btn-ghost btn-sm md:px-2 lg:px-3 text-xs font-semibold uppercase tracking-wider text-error"
                 >
                   <Icon icon="mdi:logout" width="16" aria-hidden="true" /> Logout
                 </button>
               </>
             ) : (
-              navLink('/login', 'mdi:login', 'Login')
+              navLink('/login', 'mdi:login', 'Login', 'md:px-2 lg:px-3')
             )}
           </nav>
 
