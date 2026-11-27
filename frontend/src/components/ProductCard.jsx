@@ -30,12 +30,12 @@ const ProductCard = ({ product }) => {
         {/* Image with gradient overlay */}
         <div className="relative">
           <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.35 }}>
-            <img src={product.imageUrl} alt={product.name} className="h-72 w-full object-cover" />
+            <img src={product.imageUrl} alt={product.name} className="h-56 sm:h-72 w-full object-cover" />
           </motion.div>
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-base-100/80 to-transparent" />
         </div>
 
-        <div className="card-body flex flex-col">
+        <div className="card-body flex flex-col p-4 sm:p-6">
           <h2 className="card-title truncate font-serif">{product.name}</h2>
           <div className="mb-2">
             <RatingDisplay rating={product.ratings} count={product.numReviews} showCount={false} />

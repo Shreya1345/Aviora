@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 
 const Footer = () => {
   return (
-    <footer className="mt-16 border-t border-base-300 bg-base-200 text-base-content/80">
-      <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <footer className="mt-10 sm:mt-16 border-t border-base-300 bg-base-200 text-base-content/80">
+      <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
           {/* Brand info */}
           <div>

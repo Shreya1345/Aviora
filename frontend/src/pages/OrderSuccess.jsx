@@ -14,17 +14,17 @@ const OrderSuccess = () => {
   );
 
   return (
-    <div className="mx-auto w-full max-w-xl px-4 py-16 sm:px-6">
-      <div className="card rounded-3xl border border-base-300 bg-base-100 p-8 text-center shadow-lg sm:p-12">
-        <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-success/15 text-success">
-          <Icon icon="mdi:check-circle" width="56" aria-hidden="true" />
+    <div className="mx-auto w-full max-w-xl px-4 py-8 sm:py-16 sm:px-6">
+      <div className="card rounded-2xl sm:rounded-3xl border border-base-300 bg-base-100 p-6 text-center shadow-lg sm:p-12">
+        <div className="mx-auto mb-5 flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-success/15 text-success">
+          <Icon icon="mdi:check-circle" width="48" aria-hidden="true" />
         </div>
 
         <span className="badge badge-secondary mb-3 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
           {isTestOrder ? 'Test Order Placed' : isCodOrder ? 'Order Placed · Cash on Delivery' : 'Payment Confirmed'}
         </span>
 
-        <h1 className="mb-3 text-3xl font-bold sm:text-4xl text-base-content" style={{ fontFamily: "'Playfair Display', serif" }}>
+        <h1 className="mb-3 text-2xl font-bold sm:text-4xl text-base-content" style={{ fontFamily: "'Playfair Display', serif" }}>
           {isTestOrder || isCodOrder ? 'Order Placed!' : 'Thank You For Your Order'}
         </h1>
 

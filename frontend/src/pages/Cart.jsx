@@ -37,7 +37,7 @@ const Cart = () => {
       </div>
 
       {cartItems.length === 0 ? (
-        <div className="card items-center rounded-3xl border border-base-300 bg-base-100 p-12 text-center shadow-sm">
+        <div className="card items-center rounded-2xl sm:rounded-3xl border border-base-300 bg-base-100 p-6 sm:p-12 text-center shadow-sm">
           <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-secondary/10">
             <Icon icon="mdi:shopping-outline" width="40" className="text-secondary" aria-hidden="true" />
           </div>
@@ -56,51 +56,79 @@ const Cart = () => {
           </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+        <div className="grid grid-cols-1 gap-6 lg:gap-8 lg:grid-cols-12">
           <div className="lg:col-span-8">
-            {cartItems.map((item) => (
-              <article
-                key={item.productId}
-                className="grid grid-cols-[4fr_1fr_auto] items-center gap-4 border-b border-base-300 py-4 text-base-content/80 sm:grid-cols-[4fr_1.5fr_auto]"
-              >
-                <div className="flex items-start gap-4 sm:gap-6">
-                  <img
-                    src={item.imageUrl}
-                    alt={item.name}
-                    className="h-16 w-16 rounded-lg object-cover sm:h-20 sm:w-20"
-                  />
-                  <div>
-                    <h3 className="text-sm font-bold sm:text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>
-                      {item.name}
-                    </h3>
-                    <p className="mt-2 font-semibold text-secondary">
-                      {formatCurrency(item.price)}
-                    </p>
-                  </div>
-                </div>
-                <input
-                  type="number"
-                  min="1"
-                  step="1"
-                  aria-label={`Quantity for ${item.name}`}
-                  value={item.qty}
-                  onChange={(event) => handleUpdateQty(item, event.target.value)}
-                  className="input input-bordered input-sm w-16"
-                />
-                <button
-                  type="button"
-                  onClick={() => handleRemove(item.productId)}
-                  className="btn btn-ghost btn-sm text-error"
-                  aria-label={`Remove ${item.name} from cart`}
-                >
-                  <Icon icon="mdi:trash-can-outline" aria-hidden="true" />
-                </button>
-              </article>
-            ))}
+            <div className="card border border-base-300 bg-base-100 shadow-sm">
+              <div className="card-body divide-y divide-base-300 p-4 sm:p-6">
+                {cartItems.map((item) => (
+                  <article
+                    key={item.productId}
+                    className="flex flex-col gap-4 py-4 first:pt-0 last:pb-0 text-base-content/80 sm:flex-row sm:items-center sm:justify-between"
+                  >
+                    <div className="flex items-center gap-3 sm:gap-5 min-w-0">
+                      <img
+                        src={item.imageUrl}
+                        alt={item.name}
+                        className="h-20 w-20 shrink-0 rounded-xl object-cover border border-base-300"
+                      />
+                      <div className="min-w-0">
+                        <h3 className="text-base font-bold sm:text-lg leading-snug" style={{ fontFamily: "'Playfair Display', serif" }}>
+                          {item.name}
+                        </h3>
+                        <p className="mt-1 text-sm font-semibold text-secondary">
+                          {formatCurrency(item.price)}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between gap-3 sm:justify-end">
+                      <div className="join" aria-label={`Quantity controls for ${item.name}`}>
+                        <button
+                          type="button"
+                          onClick={() => handleUpdateQty(item, item.qty - 1)}
+                          disabled={item.qty <= 1}
+                          className="btn btn-outline btn-sm join-item"
+                          aria-label={`Decrease quantity for ${item.name}`}
+                        >
+                          <Icon icon="mdi:minus" width="14" aria-hidden="true" />
+                        </button>
+                        <input
+                          type="number"
+                          min="1"
+                          step="1"
+                          aria-label={`Quantity for ${item.name}`}
+                          value={item.qty}
+                          onChange={(event) => handleUpdateQty(item, event.target.value)}
+                          className="input input-bordered input-sm join-item w-14 text-center font-semibold"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleUpdateQty(item, item.qty + 1)}
+                          className="btn btn-outline btn-sm join-item"
+                          aria-label={`Increase quantity for ${item.name}`}
+                        >
+                          <Icon icon="mdi:plus" width="14" aria-hidden="true" />
+                        </button>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => handleRemove(item.productId)}
+                        className="btn btn-ghost btn-sm text-error"
+                        aria-label={`Remove ${item.name} from cart`}
+                      >
+                        <Icon icon="mdi:trash-can-outline" width="18" aria-hidden="true" />
+                        <span className="sm:hidden">Remove</span>
+                      </button>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="lg:col-span-4">
-            <div className="sticky top-28 space-y-4">
+            <div className="space-y-4 lg:sticky lg:top-24">
               <CartSummary totalAmount={totalPrice} />
               <button
                 onClick={() => navigate('/checkout')}

@@ -2,16 +2,16 @@ const About = () => {
   return (
     <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       {/* Hero Banner */}
-      <section className="relative mb-8 overflow-hidden rounded-3xl shadow-xl">
+      <section className="relative mb-8 overflow-hidden rounded-2xl sm:rounded-3xl shadow-xl">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: 'url(https://images.pexels.com/photos/2849742/pexels-photo-2849742.jpeg?auto=compress&cs=tinysrgb&w=1920)' }}
         />
         <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 px-6 py-16 text-center sm:px-10 sm:py-24">
+        <div className="relative z-10 px-5 py-12 text-center sm:px-10 sm:py-24">
           <span className="badge badge-primary mb-3">About Aviora</span>
-          <h1 className="mb-3 text-4xl font-bold text-white sm:text-5xl">Our Story</h1>
-          <p className="mb-0 text-lg text-white/75">Crafting beauty since 2024</p>
+          <h1 className="mb-3 text-3xl font-bold text-white sm:text-5xl">Our Story</h1>
+          <p className="mb-0 text-base sm:text-lg text-white/75">Crafting beauty since 2024</p>
         </div>
       </section>
 

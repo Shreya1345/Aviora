@@ -37,63 +37,52 @@ const AdminOrders = () => {
   };
 
   return (
-    <div style={containerStyle}>
-      <h2 style={{ color: '#f97316', marginBottom: '20px' }} className="flex items-center gap-2">
-        <Icon icon="mdi:clipboard-list-outline" aria-hidden="true" /> Manage Orders
-      </h2>
-      <div style={{ overflowX: 'auto' }}>
-        <table style={tableStyle}>
-          <thead>
-            <tr style={rowStyle}>
-              <th style={thStyle}>ORDER ID</th>
-              <th style={thStyle}>USER</th>
-              <th style={thStyle}>TOTAL</th>
-              <th style={thStyle}>PAYMENT</th>
-              <th style={thStyle}>DATE</th>
-              <th style={thStyle}>STATUS</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map(order => (
-              <tr key={order._id} style={rowStyle}>
-                <td style={tdStyle}>{order._id.substring(0, 8)}...</td>
-                <td style={tdStyle}>{order.userId?.name || 'Deleted User'}</td>
-                <td style={tdStyle}>{formatCurrency(order.totalAmount, order.currency || 'INR')}</td>
-                <td style={tdStyle}>{order.paymentProvider?.toUpperCase() || '—'}</td>
-                <td style={tdStyle}>{new Date(order.createdAt).toLocaleDateString()}</td>
-                <td style={tdStyle}>
-                  <select 
-                    value={order.status} 
-                    onChange={(e) => updateStatus(order._id, e.target.value)}
-                    style={{ background: '#fff', color: '#18181b', padding: '6px 10px', border: '1px solid #d4d4d8', borderRadius: '8px', outline: 'none' }}
-                  >
-                    <option value="Pending">Pending</option>
-                    <option value="Shipped">Shipped</option>
-                    <option value="Delivered">Delivered</option>
-                  </select>
-                </td>
+    <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mb-6 flex items-center justify-between gap-4">
+        <h2 className="mb-0 flex items-center gap-2 text-2xl font-bold text-primary">
+          <Icon icon="mdi:clipboard-list-outline" aria-hidden="true" /> Manage Orders
+        </h2>
+      </div>
+      <div className="card border border-base-300 bg-base-100 shadow-sm">
+        <div className="overflow-x-auto">
+          <table className="table table-zebra">
+            <thead>
+              <tr>
+                <th>ORDER ID</th>
+                <th>USER</th>
+                <th>TOTAL</th>
+                <th>PAYMENT</th>
+                <th>DATE</th>
+                <th>STATUS</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {orders.map(order => (
+                <tr key={order._id}>
+                  <td className="font-mono text-xs">{order._id.substring(0, 8)}...</td>
+                  <td>{order.userId?.name || 'Deleted User'}</td>
+                  <td>{formatCurrency(order.totalAmount, order.currency || 'INR')}</td>
+                  <td>{order.paymentProvider?.toUpperCase() || '—'}</td>
+                  <td>{new Date(order.createdAt).toLocaleDateString()}</td>
+                  <td>
+                    <select
+                      value={order.status}
+                      onChange={(e) => updateStatus(order._id, e.target.value)}
+                      className="select select-bordered select-sm"
+                    >
+                      <option value="Pending">Pending</option>
+                      <option value="Shipped">Shipped</option>
+                      <option value="Delivered">Delivered</option>
+                    </select>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
 };
-
-const containerStyle = {
-  maxWidth: '1200px',
-  margin: '40px auto',
-  padding: '30px',
-  background: '#fff',
-  borderRadius: '16px',
-  border: '1px solid #e4e4e7',
-  boxShadow: '0 12px 32px rgba(24,24,27,0.1)',
-  color: '#18181b'
-};
-const tableStyle = { width: '100%', borderCollapse: 'collapse', color: '#18181b' };
-const rowStyle = { borderBottom: '1px solid #e4e4e7' };
-const thStyle = { padding: '15px', textAlign: 'left', color: '#52525b', fontSize: '0.9rem' };
-const tdStyle = { padding: '15px', textAlign: 'left', color: '#18181b' };
 
 export default AdminOrders;

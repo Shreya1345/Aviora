@@ -36,32 +36,26 @@ const AdminDashboard = () => {
     fetchStats();
   }, [user, navigate]);
 
-  const numberStyle = {
-    fontSize: '2.5rem',
-    fontWeight: '700',
-    color: '#f97316'
-  };
-
   return (
     <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '5px' }}>
-        <h2 style={{ margin: 0 }}>Admin Dashboard</h2>
+      <div className="mb-1 flex items-center gap-3">
+        <h2 className="m-0 text-2xl sm:text-3xl font-bold">Admin Dashboard</h2>
       </div>
-      <p className="mb-8 text-base-content/65">Welcome back, <span className="font-semibold text-base-content">Aviora</span></p>
+      <p className="mb-6 sm:mb-8 text-base-content/65">Welcome back, <span className="font-semibold text-base-content">Aviora</span></p>
       
       {stats ? (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <div className="card border border-base-300 bg-base-100 text-center shadow-sm"><div className="card-body"><h6 className="text-base-content/65">Total Orders</h6><div style={numberStyle}>{stats.totalOrders}</div></div></div>
-          <div className="card border border-base-300 bg-base-100 text-center shadow-sm"><div className="card-body"><h6 className="text-base-content/65">Total Products</h6><div style={numberStyle}>{stats.totalProducts}</div></div></div>
-          <div className="card border border-base-300 bg-base-100 text-center shadow-sm"><div className="card-body"><h6 className="text-base-content/65">Total Users</h6><div style={numberStyle}>{stats.totalUsers}</div></div></div>
-          <div className="card border border-base-300 bg-base-100 text-center shadow-sm"><div className="card-body"><h6 className="text-base-content/65">Revenue (USD)</h6><div style={numberStyle}>{formatCurrency(stats.revenueUsd || 0)}</div>{stats.revenueInr > 0 && <p className="mb-0 mt-2 text-sm text-base-content/60">Historical INR orders: {formatCurrency(stats.revenueInr, 'INR')}</p>}</div></div>
+          <div className="card border border-base-300 bg-base-100 text-center shadow-sm"><div className="card-body p-5"><h6 className="text-base-content/65">Total Orders</h6><div className="text-3xl sm:text-4xl font-bold text-primary">{stats.totalOrders}</div></div></div>
+          <div className="card border border-base-300 bg-base-100 text-center shadow-sm"><div className="card-body p-5"><h6 className="text-base-content/65">Total Products</h6><div className="text-3xl sm:text-4xl font-bold text-primary">{stats.totalProducts}</div></div></div>
+          <div className="card border border-base-300 bg-base-100 text-center shadow-sm"><div className="card-body p-5"><h6 className="text-base-content/65">Total Users</h6><div className="text-3xl sm:text-4xl font-bold text-primary">{stats.totalUsers}</div></div></div>
+          <div className="card border border-base-300 bg-base-100 text-center shadow-sm"><div className="card-body p-5"><h6 className="text-base-content/65">Revenue (USD)</h6><div className="text-3xl sm:text-4xl font-bold text-primary">{formatCurrency(stats.revenueUsd || 0)}</div>{stats.revenueInr > 0 && <p className="mb-0 mt-2 text-sm text-base-content/60">Historical INR orders: {formatCurrency(stats.revenueInr, 'INR')}</p>}</div></div>
         </div>
       ) : (
         <div className="py-12 text-center"><span className="loading loading-spinner loading-lg text-primary" role="status" /></div>
       )}
 
       <section className="card mt-6 border border-base-300 bg-base-100 shadow-sm">
-        <div className="card-body p-6">
+        <div className="card-body p-4 sm:p-6">
           <h3 className="mb-1 text-2xl font-bold text-primary">Administrative Controls</h3>
           <p className="mb-4 text-base-content/65">Manage your store from one place.</p>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">

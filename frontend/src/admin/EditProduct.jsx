@@ -54,7 +54,7 @@ const EditProduct = () => {
   return (
     <div className="mx-auto w-full max-w-3xl px-4 sm:px-6">
       <section className="card border border-base-300 bg-base-100 shadow-sm">
-        <div className="card-body p-6 sm:p-8">
+        <div className="card-body p-4 sm:p-8">
           <h2 className="mb-4 flex items-center gap-2 text-2xl font-bold text-primary"><Icon icon="mdi:pencil-outline" aria-hidden="true" />Edit Product</h2>
           <form onSubmit={handleSubmit}>
             <input className="input input-bordered mb-3 w-full" type="text" placeholder="Product Name" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />

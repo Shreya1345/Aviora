@@ -56,22 +56,22 @@ const Profile = () => {
   return (
     <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
       <section className="card border border-base-300 bg-base-100 shadow-sm">
-        <div className="card-body flex flex-col justify-between gap-6 border-b border-base-300 sm:flex-row">
+        <div className="card-body flex flex-col justify-between gap-4 sm:gap-6 border-b border-base-300 p-4 sm:p-6 sm:flex-row">
         <div>
-          <h2 className="mb-3 flex items-center gap-2 text-3xl font-bold">
+          <h2 className="mb-3 flex items-center gap-2 text-2xl sm:text-3xl font-bold">
             <Icon icon="mdi:account-circle-outline" className="text-primary" aria-hidden="true" />My Profile
           </h2>
-          <p className="mb-1 text-base-content/70"><strong>Name:</strong> {user.name}</p>
-          <p className="mb-4 text-base-content/70"><strong>Email:</strong> {user.email}</p>
+          <p className="mb-1 text-base-content/70 break-all"><strong>Name:</strong> {user.name}</p>
+          <p className="mb-4 text-base-content/70 break-all"><strong>Email:</strong> {user.email}</p>
           <span className="badge badge-primary badge-outline">Account Type: {user.role.toUpperCase()}</span>
         </div>
-        <button onClick={handleLogout} className="btn btn-error btn-outline self-start">
+        <button onClick={handleLogout} className="btn btn-error btn-outline w-full sm:w-auto sm:self-start">
           <Icon icon="mdi:logout" aria-hidden="true" /> Logout
         </button>
         </div>
 
       {user.role !== 'admin' && (
-        <div className="card-body">
+        <div className="card-body p-4 sm:p-6">
           <h3 className="mb-1 flex items-center gap-2 text-xl font-bold">
             <Icon icon="mdi:clipboard-list-outline" className="text-primary" aria-hidden="true" />Order History
           </h3>

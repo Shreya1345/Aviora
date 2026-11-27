@@ -5,7 +5,7 @@ const ReturnPolicy = () => {
   return (
     <div className="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8">
       <div className="card border border-base-300 bg-base-100 shadow-sm">
-        <div className="card-body p-6 sm:p-10">
+        <div className="card-body p-4 sm:p-10">
           <nav aria-label="Breadcrumb" className="breadcrumbs mb-4 text-xs">
             <ul>
               <li><Link to="/" className="text-base-content/60 hover:text-primary">Home</Link></li>
@@ -13,7 +13,7 @@ const ReturnPolicy = () => {
             </ul>
           </nav>
 
-          <h1 className="mb-4 text-3xl font-bold sm:text-4xl" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h1 className="mb-4 text-2xl font-bold sm:text-4xl" style={{ fontFamily: "'Playfair Display', serif" }}>
             Return &amp; Refund Policy
           </h1>
           <p className="mb-6 leading-relaxed text-base-content/75">
@@ -59,7 +59,7 @@ const ReturnPolicy = () => {
           </div>
 
           <div className="mt-8 border-t border-base-300 pt-6 flex justify-between items-center">
-            <Link to="/shop" className="btn btn-primary text-white">
+            <Link to="/shop" className="btn btn-primary w-full sm:w-auto text-white">
               <Icon icon="mdi:storefront-outline" /> Return to Collections
             </Link>
           </div>

@@ -80,12 +80,14 @@ const AdminProducts = () => {
                 <td>{product.category}</td>
                 <td>{product.stock}</td>
                 <td>
-                  <Link to={`/admin/edit-product/${product._id}`} className="btn btn-sm btn-primary mr-2 inline-flex items-center gap-1">
-                    <Icon icon="mdi:pencil-outline" aria-hidden="true" /> Edit
-                  </Link>
-                  <button onClick={() => handleDelete(product._id)} className="btn btn-sm btn-error inline-flex items-center gap-1">
-                    <Icon icon="mdi:trash-can-outline" aria-hidden="true" /> Delete
-                  </button>
+                  <div className="flex flex-wrap gap-2">
+                    <Link to={`/admin/edit-product/${product._id}`} className="btn btn-sm btn-primary inline-flex items-center gap-1">
+                      <Icon icon="mdi:pencil-outline" aria-hidden="true" /> Edit
+                    </Link>
+                    <button onClick={() => handleDelete(product._id)} className="btn btn-sm btn-error inline-flex items-center gap-1">
+                      <Icon icon="mdi:trash-can-outline" aria-hidden="true" /> Delete
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

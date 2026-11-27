@@ -75,29 +75,29 @@ const ProductDetail = () => {
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-      <nav aria-label="Breadcrumb" className="breadcrumbs mb-6 text-sm">
+      <nav aria-label="Breadcrumb" className="breadcrumbs mb-4 sm:mb-6 text-xs sm:text-sm overflow-x-auto">
         <ul>
           <li><Link to="/" className="text-base-content/60 hover:text-primary">Home</Link></li>
           <li><Link to="/shop" className="text-base-content/60 hover:text-primary">Collections</Link></li>
-          <li aria-current="page" className="font-medium text-primary">{product.name}</li>
+          <li aria-current="page" className="max-w-[160px] sm:max-w-none truncate font-medium text-primary">{product.name}</li>
         </ul>
       </nav>
 
-      <section className="card overflow-hidden rounded-3xl border border-base-300 bg-base-100 shadow-lg">
-        <div className="card-body p-6 sm:p-10">
-          <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2">
+      <section className="card overflow-hidden rounded-2xl sm:rounded-3xl border border-base-300 bg-base-100 shadow-lg">
+        <div className="card-body p-4 sm:p-10">
+          <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2 md:gap-10">
             {/* Product Image */}
             <div className="relative overflow-hidden rounded-2xl bg-base-200">
               <img
                 src={product.imageUrl}
                 alt={product.name}
-                className="max-h-[520px] w-full object-cover shadow-sm transition-transform duration-500 hover:scale-105"
+                className="max-h-[360px] sm:max-h-[520px] w-full object-cover shadow-sm transition-transform duration-500 hover:scale-105"
               />
-              <div className="absolute top-4 right-4 z-10">
+              <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10">
                 <WishlistButton productId={product._id} rounded />
               </div>
-              <div className="absolute top-4 left-4 z-10">
-                <span className="rounded-full bg-secondary px-3 py-1 text-xs font-semibold uppercase tracking-widest text-secondary-content shadow">
+              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10">
+                <span className="rounded-full bg-secondary px-2.5 py-1 text-[10px] sm:px-3 sm:text-xs font-semibold uppercase tracking-widest text-secondary-content shadow">
                   Certified Fine Jewelry
                 </span>
               </div>
@@ -108,17 +108,17 @@ const ProductDetail = () => {
               <span className="mb-2 text-xs font-bold uppercase tracking-widest text-primary">
                 {product.category || 'High Jewelry'}
               </span>
-              <h1 className="mb-3 text-3xl font-bold sm:text-4xl" style={{ fontFamily: "'Playfair Display', serif" }}>
+              <h1 className="mb-3 text-2xl font-bold sm:text-4xl" style={{ fontFamily: "'Playfair Display', serif" }}>
                 {product.name}
               </h1>
 
-              <div className="mb-4 flex items-center gap-3">
+              <div className="mb-4 flex flex-wrap items-center gap-2 sm:gap-3">
                 <RatingDisplay rating={product.ratings} count={product.numReviews} large />
-                <span className="text-sm text-base-content/50">|</span>
-                <span className="text-sm text-base-content/60">SKU: AV-{product._id?.slice(-6).toUpperCase()}</span>
+                <span className="hidden sm:inline text-sm text-base-content/50">|</span>
+                <span className="text-xs sm:text-sm text-base-content/60">SKU: AV-{product._id?.slice(-6).toUpperCase()}</span>
               </div>
 
-              <p className="mb-6 text-3xl font-bold text-secondary">
+              <p className="mb-5 sm:mb-6 text-2xl sm:text-3xl font-bold text-secondary">
                 {formatPrice(product.price)}
               </p>
 
@@ -126,11 +126,11 @@ const ProductDetail = () => {
                 <h5 className="mb-2 text-sm font-semibold uppercase tracking-wider text-base-content/80">
                   Description &amp; Details
                 </h5>
-                <p className="leading-relaxed text-base-content/75">{product.description}</p>
+                <p className="leading-relaxed text-base-content/75 text-sm sm:text-base">{product.description}</p>
               </div>
 
               {/* Jewelry Assurance Badges */}
-              <div className="mb-6 grid grid-cols-2 gap-3 rounded-2xl bg-base-200/60 p-4 text-xs text-base-content/80">
+              <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 gap-3 rounded-2xl bg-base-200/60 p-4 text-xs text-base-content/80">
                 <div className="flex items-center gap-2">
                   <Icon icon="mdi:diamond-stone" className="text-lg text-primary" />
                   <span>100% Certified Authentic</span>
