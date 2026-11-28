@@ -280,88 +280,90 @@ const Checkout = () => {
   const totalUsd = cartItems.reduce((total, item) => total + item.price * item.qty, 0);
 
   return (
-    <div className="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8">
-      <section className="card border border-base-300 bg-base-100 shadow-sm">
-        <div className="card-body p-4 sm:p-8">
-          <h2 className="mb-5 flex items-center gap-2 text-2xl font-bold">
-            <Icon icon="mdi:clipboard-check-outline" className="text-primary" aria-hidden="true" /> Checkout
-          </h2>
-          <form ref={formRef} onSubmit={handlePlaceOrder}>
-            <h5 className="mb-3 flex items-center gap-2 font-semibold"><Icon icon="mdi:map-marker-outline" className="text-primary" aria-hidden="true" />Shipping Address</h5>
-            <div className="form-control mb-3">
-              <label className="label text-sm whitespace-normal" htmlFor="saved-address">Choose a saved address or enter a new one</label>
-              <select id="saved-address" className="select select-bordered w-full" value={selectedAddressId} onChange={handleAddressSelect} disabled={loadingAddresses || placingOrder}>
-                {savedAddresses.map((savedAddress) => (
-                  <option key={savedAddress._id} value={savedAddress._id}>
-                    {formatAddress(savedAddress)}
-                  </option>
-                ))}
-                <option value="new">Use a new address</option>
-              </select>
-              {loadingAddresses && <small className="mt-1 text-base-content/60">Loading your saved addresses...</small>}
-            </div>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <input aria-label="First name" autoComplete="given-name" className="input input-bordered w-full" name="firstName" placeholder="First name" required value={address.firstName} onChange={handleAddressChange} disabled={placingOrder} />
-              <input aria-label="Last name" autoComplete="family-name" className="input input-bordered w-full" name="lastName" placeholder="Last name" required value={address.lastName} onChange={handleAddressChange} disabled={placingOrder} />
-              <input aria-label="Email address" autoComplete="email" className="input input-bordered w-full sm:col-span-2" name="email" type="email" placeholder="Email address" required value={address.email || user?.email || ''} onChange={handleAddressChange} disabled={placingOrder} />
-              <input aria-label="Street" autoComplete="street-address" className="input input-bordered w-full sm:col-span-2" name="street" placeholder="Street" required value={address.street} onChange={handleAddressChange} disabled={placingOrder} />
-              <input aria-label="City" autoComplete="address-level2" className="input input-bordered w-full" name="city" placeholder="City" required value={address.city} onChange={handleAddressChange} disabled={placingOrder} />
-              <input aria-label="State" autoComplete="address-level1" className="input input-bordered w-full" name="state" placeholder="State" required value={address.state} onChange={handleAddressChange} disabled={placingOrder} />
-              <input aria-label="Zipcode" autoComplete="postal-code" className="input input-bordered w-full" name="zipcode" placeholder="Zipcode" required value={address.zipcode} onChange={handleAddressChange} disabled={placingOrder} />
-              <input aria-label="Country" autoComplete="country-name" className="input input-bordered w-full" name="country" placeholder="Country" required value={address.country} onChange={handleAddressChange} disabled={placingOrder} />
-              <input aria-label="Phone" autoComplete="tel" className="input input-bordered w-full sm:col-span-2" name="phone" type="tel" placeholder="Phone" required value={address.phone} onChange={handleAddressChange} disabled={placingOrder} />
-            </div>
-            <fieldset className="mt-5 space-y-1">
-              <legend className="mb-2 font-semibold">Payment method</legend>
-              <label className="flex cursor-pointer items-center gap-3 py-1.5 text-sm sm:text-base">
-                <input type="radio" className="radio radio-primary shrink-0" id="payment-stripe" name="paymentMethod" value="stripe" checked={paymentMethod === 'stripe'} onChange={() => setPaymentMethod('stripe')} disabled={placingOrder} />
-                <span>Pay securely with Stripe</span>
-              </label>
-              <label className="flex cursor-pointer items-center gap-3 py-1.5 text-sm sm:text-base">
-                <input type="radio" className="radio radio-primary shrink-0" id="payment-razorpay" name="paymentMethod" value="razorpay" checked={paymentMethod === 'razorpay'} onChange={() => setPaymentMethod('razorpay')} disabled={placingOrder} />
-                <span>Pay securely with Razorpay</span>
-              </label>
-              <label className="flex cursor-pointer items-center gap-3 py-1.5 text-sm sm:text-base">
-                <input type="radio" className="radio radio-primary shrink-0" id="payment-cod" name="paymentMethod" value="cod" checked={paymentMethod === 'cod'} onChange={() => setPaymentMethod('cod')} disabled={placingOrder} />
-                <span>Cash on delivery</span>
-              </label>
-              {paymentMethod === 'cod' ? (
-                <small className="mt-1 block text-base-content/60">
-                  Pay for your order in cash when it is delivered.
-                </small>
-              ) : paymentMethod === 'razorpay' ? (
-                <small className="mt-1 block text-base-content/60">
-                  Your USD total is converted to INR using the latest available reference rate. The exact charge is shown in Razorpay Checkout.
-                </small>
-              ) : (
-                <small className="mt-1 block text-base-content/60">
-                  You&apos;ll continue to Stripe&apos;s secure checkout to complete payment.
-                </small>
-              )}
-            </fieldset>
-            <div className="mt-5 border-t border-base-300 pt-5">
-              <CartSummary totalAmount={totalUsd} />
-              <button type="submit" className="btn btn-primary btn-lg mt-4 w-full sm:w-auto gap-2" disabled={placingOrder || loadingAddresses || cartItems.length === 0}>
-                  <Icon
-                    icon={placingOrder ? 'mdi:loading' : paymentMethod === 'cod' ? 'mdi:package-check' : 'mdi:credit-card-outline'}
-                    aria-hidden="true"
-                  />
-                  {placingOrder
-                    ? (
-                      paymentMethod === 'cod' ? 'Placing COD order…'
-                        : paymentMethod === 'razorpay' ? 'Opening Razorpay…'
-                          : 'Starting Stripe Checkout…'
-                    )
-                    : (
-                      paymentMethod === 'cod' ? 'Place COD Order'
-                        : paymentMethod === 'razorpay' ? 'Continue to Razorpay'
-                          : 'Continue to Stripe'
-                    )}
-              </button>
-            </div>
-          </form>
-        </div>
-      </section>
+    <div className="mx-auto grid w-full max-w-7xl grid-cols-12 px-4 sm:px-6 lg:px-8">
+      <div className="col-span-12 lg:col-span-8 lg:col-start-3">
+        <section className="card border border-base-300 bg-base-100 shadow-sm">
+          <div className="card-body p-5 sm:p-8">
+            <h2 className="mb-5 flex items-center gap-2 text-2xl font-bold">
+              <Icon icon="mdi:clipboard-check-outline" className="text-primary" aria-hidden="true" /> Checkout
+            </h2>
+            <form ref={formRef} onSubmit={handlePlaceOrder}>
+              <h5 className="mb-3 flex items-center gap-2 font-semibold"><Icon icon="mdi:map-marker-outline" className="text-primary" aria-hidden="true" />Shipping Address</h5>
+              <div className="form-control mb-3">
+                <label className="label" htmlFor="saved-address">Choose a saved address or enter a new one</label>
+                <select id="saved-address" className="select select-bordered w-full" value={selectedAddressId} onChange={handleAddressSelect} disabled={loadingAddresses || placingOrder}>
+                  {savedAddresses.map((savedAddress) => (
+                    <option key={savedAddress._id} value={savedAddress._id}>
+                      {formatAddress(savedAddress)}
+                    </option>
+                  ))}
+                  <option value="new">Use a new address</option>
+                </select>
+                {loadingAddresses && <small className="mt-1 text-base-content/60">Loading your saved addresses...</small>}
+              </div>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <input aria-label="First name" autoComplete="given-name" className="input input-bordered w-full" name="firstName" placeholder="First name" required value={address.firstName} onChange={handleAddressChange} disabled={placingOrder} />
+                <input aria-label="Last name" autoComplete="family-name" className="input input-bordered w-full" name="lastName" placeholder="Last name" required value={address.lastName} onChange={handleAddressChange} disabled={placingOrder} />
+                <input aria-label="Email address" autoComplete="email" className="input input-bordered w-full sm:col-span-2" name="email" type="email" placeholder="Email address" required value={address.email || user?.email || ''} onChange={handleAddressChange} disabled={placingOrder} />
+                <input aria-label="Street" autoComplete="street-address" className="input input-bordered w-full sm:col-span-2" name="street" placeholder="Street" required value={address.street} onChange={handleAddressChange} disabled={placingOrder} />
+                <input aria-label="City" autoComplete="address-level2" className="input input-bordered w-full" name="city" placeholder="City" required value={address.city} onChange={handleAddressChange} disabled={placingOrder} />
+                <input aria-label="State" autoComplete="address-level1" className="input input-bordered w-full" name="state" placeholder="State" required value={address.state} onChange={handleAddressChange} disabled={placingOrder} />
+                <input aria-label="Zipcode" autoComplete="postal-code" className="input input-bordered w-full" name="zipcode" placeholder="Zipcode" required value={address.zipcode} onChange={handleAddressChange} disabled={placingOrder} />
+                <input aria-label="Country" autoComplete="country-name" className="input input-bordered w-full" name="country" placeholder="Country" required value={address.country} onChange={handleAddressChange} disabled={placingOrder} />
+                <input aria-label="Phone" autoComplete="tel" className="input input-bordered w-full sm:col-span-2" name="phone" type="tel" placeholder="Phone" required value={address.phone} onChange={handleAddressChange} disabled={placingOrder} />
+              </div>
+              <fieldset className="mt-5">
+                <legend className="mb-2 font-semibold">Payment method</legend>
+                <label className="label cursor-pointer justify-start gap-3">
+                  <input type="radio" className="radio radio-primary" id="payment-stripe" name="paymentMethod" value="stripe" checked={paymentMethod === 'stripe'} onChange={() => setPaymentMethod('stripe')} disabled={placingOrder} />
+                  <span>Pay securely with Stripe</span>
+                </label>
+                <label className="label cursor-pointer justify-start gap-3">
+                  <input type="radio" className="radio radio-primary" id="payment-razorpay" name="paymentMethod" value="razorpay" checked={paymentMethod === 'razorpay'} onChange={() => setPaymentMethod('razorpay')} disabled={placingOrder} />
+                  <span>Pay securely with Razorpay</span>
+                </label>
+                <label className="label cursor-pointer justify-start gap-3">
+                  <input type="radio" className="radio radio-primary" id="payment-cod" name="paymentMethod" value="cod" checked={paymentMethod === 'cod'} onChange={() => setPaymentMethod('cod')} disabled={placingOrder} />
+                  <span>Cash on delivery</span>
+                </label>
+                {paymentMethod === 'cod' ? (
+                  <small className="mt-1 block text-base-content/60">
+                    Pay for your order in cash when it is delivered.
+                  </small>
+                ) : paymentMethod === 'razorpay' ? (
+                  <small className="mt-1 block text-base-content/60">
+                    Your USD total is converted to INR using the latest available reference rate. The exact charge is shown in Razorpay Checkout.
+                  </small>
+                ) : (
+                  <small className="mt-1 block text-base-content/60">
+                    You&apos;ll continue to Stripe&apos;s secure checkout to complete payment.
+                  </small>
+                )}
+              </fieldset>
+              <div className="mt-5 border-t border-base-300 pt-5">
+                <CartSummary totalAmount={totalUsd} />
+                <button type="submit" className="btn btn-primary btn-lg mt-3 gap-2" disabled={placingOrder || loadingAddresses || cartItems.length === 0}>
+                    <Icon
+                      icon={placingOrder ? 'mdi:loading' : paymentMethod === 'cod' ? 'mdi:package-check' : 'mdi:credit-card-outline'}
+                      aria-hidden="true"
+                    />
+                    {placingOrder
+                      ? (
+                        paymentMethod === 'cod' ? 'Placing COD order…'
+                          : paymentMethod === 'razorpay' ? 'Opening Razorpay…'
+                            : 'Starting Stripe Checkout…'
+                      )
+                      : (
+                        paymentMethod === 'cod' ? 'Place COD Order'
+                          : paymentMethod === 'razorpay' ? 'Continue to Razorpay'
+                            : 'Continue to Stripe'
+                      )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
     </div>
   );
 };

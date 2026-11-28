@@ -15,10 +15,8 @@ const Shop = () => {
   const categoryFilters = searchParams.getAll('category').map((category) => category.trim()).filter(Boolean);
   const [maxPriceFilter, setMaxPriceFilter] = useState(null);
   const [sortBy, setSortBy] = useState('default');
-  const [filtersOpen, setFiltersOpen] = useState(false);
   const formatPrice = (amount) => formatCurrency(amount);
   const loading = loadedQuery !== query;
-  const activeFilterCount = categoryFilters.length + (maxPriceFilter !== null && maxPriceFilter < (products.reduce((highest, product) => Math.max(highest, Number(product.price) || 0), 0)) ? 1 : 0) + (sortBy !== 'default' ? 1 : 0);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -119,16 +117,16 @@ const Shop = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="relative mb-6 sm:mb-8 overflow-hidden rounded-2xl sm:rounded-3xl shadow-xl"
+        className="relative mb-8 overflow-hidden rounded-3xl shadow-xl"
       >
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: 'url(https://images.pexels.com/photos/248077/pexels-photo-248077.jpeg?auto=compress&cs=tinysrgb&w=1920)' }}
         />
         <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 p-6 sm:p-10">
-          <h1 className="mb-2 text-2xl sm:text-4xl font-bold text-white">Our Collections</h1>
-          <p className="mb-0 text-sm sm:text-lg text-white/75">Explore our curated selection of fine jewelry.</p>
+        <div className="relative z-10 p-8 sm:p-10">
+          <h1 className="mb-2 text-4xl font-bold text-white">Our Collections</h1>
+          <p className="mb-0 text-lg text-white/75">Explore our curated selection of fine jewelry.</p>
         </div>
       </motion.section>
 
@@ -143,22 +141,7 @@ const Shop = () => {
       ) : (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
           <div className="lg:col-span-3">
-            <button
-              type="button"
-              onClick={() => setFiltersOpen((open) => !open)}
-              className="btn btn-outline btn-sm sm:btn-md mb-4 flex w-full items-center justify-between lg:hidden"
-              aria-expanded={filtersOpen}
-            >
-              <span className="flex items-center gap-2 font-semibold">
-                <Icon icon="mdi:tune-variant" className="text-primary" aria-hidden="true" />
-                Filters &amp; Sort
-                {activeFilterCount > 0 && (
-                  <span className="badge badge-primary badge-sm text-white">{activeFilterCount}</span>
-                )}
-              </span>
-              <Icon icon={filtersOpen ? 'mdi:chevron-up' : 'mdi:chevron-down'} width="20" aria-hidden="true" />
-            </button>
-            <aside aria-label="Product filters" className={`${filtersOpen ? 'block' : 'hidden'} lg:block`}>
+            <aside aria-label="Product filters">
               <div className="card border border-base-300 bg-base-100 shadow-sm" style={{ borderTop: '3px solid #b76e79' }}>
                 <div className="card-body">
                   <div className="mb-3 flex items-center gap-2">
@@ -231,8 +214,8 @@ const Shop = () => {
             </aside>
           </div>
           <div className="lg:col-span-9">
-            <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-              <h2 className="mb-0 text-xl sm:text-2xl font-bold">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="mb-0 text-2xl font-bold">
                 {categoryFilters.length > 0
                   ? categories
                     .filter((category) => categoryFilters.some((filter) => filter.toLowerCase() === category.toLowerCase()))

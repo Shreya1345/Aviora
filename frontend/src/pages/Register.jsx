@@ -35,8 +35,8 @@ const Register = () => {
   };
 
   return (
-    <div className="mx-auto flex w-full max-w-5xl items-center justify-center px-4 py-6 sm:py-10 sm:px-6 lg:px-8">
-      <div className="flex w-full overflow-hidden rounded-2xl border border-base-300 bg-base-100 shadow-xl md:min-h-[560px]">
+    <div className="mx-auto flex w-full max-w-5xl items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
+      <div className="flex min-h-[560px] w-full overflow-hidden rounded-2xl border border-base-300 bg-base-100 shadow-xl">
         {/* Left column – hero image (hidden on mobile) */}
         <div className="hidden md:block md:w-1/2">
           <img
@@ -47,9 +47,9 @@ const Register = () => {
         </div>
 
         {/* Right column – register form */}
-        <div className="flex w-full flex-col justify-center p-5 sm:p-10 md:w-1/2">
+        <div className="flex w-full flex-col justify-center p-8 sm:p-10 md:w-1/2">
           <div className="mb-6 text-center">
-            <h2 className="flex items-center justify-center text-2xl sm:text-3xl font-bold">
+            <h2 className="flex items-center justify-center text-3xl font-bold">
               <Icon icon="mdi:diamond-stone" className="mr-2 text-primary" aria-hidden="true" />
               Create Your Account
             </h2>
