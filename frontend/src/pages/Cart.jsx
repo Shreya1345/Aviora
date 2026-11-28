@@ -59,13 +59,13 @@ const Cart = () => {
         <div className="grid grid-cols-1 gap-6 lg:gap-8 lg:grid-cols-12">
           <div className="lg:col-span-8">
             <div className="card border border-base-300 bg-base-100 shadow-sm">
-              <div className="card-body gap-0 divide-y divide-base-300 p-4 sm:p-6">
+              <div className="card-body divide-y divide-base-300 p-4 sm:p-6">
                 {cartItems.map((item) => (
                   <article
                     key={item.productId}
                     className="flex flex-col gap-4 py-4 first:pt-0 last:pb-0 text-base-content/80 sm:flex-row sm:items-center sm:justify-between"
                   >
-                    <div className="flex items-center gap-3 sm:gap-5 min-w-0 flex-1">
+                    <div className="flex items-center gap-3 sm:gap-5 min-w-0">
                       <img
                         src={item.imageUrl}
                         alt={item.name}
@@ -81,7 +81,7 @@ const Cart = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between gap-3 sm:justify-end sm:gap-4 shrink-0">
+                    <div className="flex items-center justify-between gap-3 sm:justify-end">
                       <div className="join" aria-label={`Quantity controls for ${item.name}`}>
                         <button
                           type="button"
@@ -93,13 +93,13 @@ const Cart = () => {
                           <Icon icon="mdi:minus" width="14" aria-hidden="true" />
                         </button>
                         <input
-                          type="text"
-                          inputMode="numeric"
-                          pattern="[0-9]*"
+                          type="number"
+                          min="1"
+                          step="1"
                           aria-label={`Quantity for ${item.name}`}
                           value={item.qty}
                           onChange={(event) => handleUpdateQty(item, event.target.value)}
-                          className="input input-bordered input-sm join-item w-12 text-center font-semibold"
+                          className="input input-bordered input-sm join-item w-14 text-center font-semibold"
                         />
                         <button
                           type="button"
@@ -109,10 +109,6 @@ const Cart = () => {
                         >
                           <Icon icon="mdi:plus" width="14" aria-hidden="true" />
                         </button>
-                      </div>
-
-                      <div className="hidden sm:block min-w-[90px] text-right font-bold text-base-content">
-                        {formatCurrency(item.price * item.qty)}
                       </div>
 
                       <button
